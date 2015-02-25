@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>Connected Car Simulator</title>
+      <link href="styles/simulator.css" type="text/css" rel="stylesheet" />
+   </head>
+   <body>
+      <div id="mainContainer" align="center">
+      <div align="center" style="width:1280px; margin:auto;">
+      <div style="width:100%; border:1px solid #52555d; border-radius:4px; position:relative;" align="center">
+         <!--Top yellow bar-->
+         <div id="topContainerYellowbar">
+            <span id="LoginName" class="showValues"></span>
+            <div id="topContainerLogo">
+               <img src="images/logo.png" />
+            </div>
+         </div>
+         <div id="ContentContainer">
+            <div style="width:320px; margin:auto; position:relative; margin-top:100px; padding:10px;" id="validID">
+               <input type=textbox name=textbox id=textbox placeholder="Insert Name" required style="width:100px;"/><br />
+               <br />
+               <input type=submit name=button value="Submit" class="yellowButton"  onclick="myFunction()"/>
+               <div id="text" class="showValues"></div>
+            </div>
+            <div id="leftColumn">
+               <div class="leftcolumnBg" style="display:none;" id="leftcolumnBgdiv">
+                  <br />
+                  <br />
+                  <br /><br />
+                  <img src="images/car.png" />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+               </div>
+               <div id="d1" onmouseover="show(this,ds1);" class="hitPoint" style="display:none;"></div>
+               <div id="d2" onmouseover="show(this,ds2);" class="hitPoint" style="display:none;"></div>
+               <div id="d3" onmouseover="show(this,ds3);" class="hitPoint" style="display:none;"></div>
+               <div id="d4" onmouseover="show(this,ds4);" class="hitPoint" style="display:none;"></div>
+               <div id="d5" onmouseover="show(this,ds5);" class="hitPoint" style="display:none;"></div>
+               <div id="d6" onmouseover="show(this,ds6);" class="hitPoint" style="display:none;"></div>
+               <div id="d7" onmouseover="show(this,ds7);" class="hitPoint" style="display:none;"></div>
+               <div id="d8" onmouseover="show(this,ds8);" class="hitPoint" style="display:none;"></div>
+            </div>
+            <!--Right Column-->
+            <div id="rightColumn">
+               <div id="detailsContainerdiv" class="detailsContainer" style="display:none;">
+                  Details
+                  <div class="detailsBorder">
+                     <img src="images/details-border.png" />
+                  </div>
+                  <div id="detailsContent" >
+                     <!--Tyre pressure-->
+                     <div id="ds1" class="submenu" style="display: none;">
+                        <img src="images/tyre-pressure.png" style="float:left; position:relative;" />
+                        <div class="detailsHeading">Tyre Pressure</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>Front Left:</label>&nbsp;</td>
+                              <td width="68%"><label for="tyreFL"></label>
+                                 <input id="tyreFL" name="tyreFL" type="text" id="tyreFL" value="32" maxlength="3" /><label class="units">PSI</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td><label>Front Right:</label>&nbsp;</td>
+                              <td width="68%"><label for="tyreFR"></label>
+                                 <input id="tyreFR" name="tyreFR" type="text" id="tyreFR" value="34" /><label class="units">PSI</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td><label>Rear Left:</label>&nbsp;</td>
+                              <td width="68%"><label for="tyreBL"></label>
+                                 <input id="tyreBL" name="tyreBL" type="text" id="tyreBL" value="33"  /><label class="units">PSI</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td><label>Rear Right:</label>&nbsp;</td>
+                              <td width="68%"><label for="tyreBR"></label>
+                                 <input id="tyreBR" name="tyreBR" type="text" id="tyreBR" value="34" /><label class="units">PSI</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick="callTPfunc()"/></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <!--FUEL-->
+                     <div id="ds2" class="submenu" style="display: none">
+                        <img src="images/fuel.png" style="float:left; position:relative;" />
+                        <div class="detailsHeading">Fuel</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>Fuel:</label>&nbsp;</td>
+                              <td width="68%"><label for="fuel"></label>
+                                 <input id="fuel" name="fuel" type="text" value="32" /><label class="units">litres</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick ="callFuelFunc()"/></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <!--EMISSION-->
+                     <div id="ds3" class="submenu" style="display: none">
+                        <img src="images/emission.png" style="float:left; position:relative;" />
+                        <div class="detailsHeading">Emission</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>HC:</label>&nbsp;</td>
+                              <td width="68%"><label for="hc"></label>
+                                 <input id="hc" name="hc" type="text" value="32" /><label class="units">pkm</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td><label>CO:</label>&nbsp;</td>
+                              <td width="68%"><label for="co"></label>
+                                 <input id="co" name="co" type="text" value="32" /><label class="units">pkm</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td><label>NO:</label>&nbsp;</td>
+                              <td width="68%"><label for="no"></label>
+                                 <input id="no" name="no" type="text" value="32" /><label class="units">pkm</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td><label>CO2:</label>&nbsp;</td>
+                              <td width="68%"><label for="co2"></label>
+                                 <input id="co2" name="co2" type="text" value="32" /><label class="units">pkm</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick="callEmissionFunc()" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <!--Engine Temperature-->
+                     <div id="ds4" class="submenu" style="display: none">
+                        <img src="images/engine-temp.png" style="float:left; position:relative;" />
+                        <div class="detailsHeading">Engine Temperature</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>Temperature:</label>&nbsp;</td>
+                              <td width="68%"><label for="hc"></label>
+                                 <input id="et" name="et" type="text" value="2000" /><label class="units"> degrees C</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick="callETFunc()"/></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <!--Battery-->
+                     <div id="ds5" class="submenu" style="display: none">
+                        <img src="images/battery.png" style="float:left; position:relative; top:7px;" />
+                        <div class="detailsHeading">Battery</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>Battery:</label>&nbsp;</td>
+                              <td width="68%"><label for="battery"></label>
+                                 <input id="battery" name="battery" type="text" value="30" /><label class="units">%</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick="callBatteryFunc()" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <!--Speed-->
+                     <div id="ds6" class="submenu" style="display: none">
+                        <img src="images/speed.png" style="float:left; position:relative;;" />
+                        <div class="detailsHeading">Speed</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>Speed:</label>&nbsp;</td>
+                              <td width="68%"><label for="speed"></label>
+                                 <input id="speed" name="speed" type="text" value="40" /><label class="units">Kms</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick="callSpeedFunc()" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <!--airbag-->
+                     <div id="ds7" class="submenu" style="display: none">
+                        <img src="images/airbag.png" style="float:left; position:relative;;" />
+                        <div class="detailsHeading">Airbag</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>Air bag:</label>&nbsp;</td>
+                              <td width="68%">
+                                 <label for="airbag"></label>
+                                 <select id="airbag" name="airbag">
+                                    <option>Open</option>
+                                    <option selected="selected">Close</option>
+                                 </select>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick="callABFunc()"/></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <!--GPS-->
+                     <div id="ds8" class="submenu" style="display: none">
+                        <img src="images/gps.png" style="float:left; position:relative; width:24px; height:24px;" />
+                        <div class="detailsHeading">GPS</div>
+                        <br />
+                        <br />
+                        <table width="300" border="0" cellspacing="10" cellpadding="0">
+                           <tr>
+                              <td><label>Latitude:</label>&nbsp;</td>
+                              <td width="68%"><label for="lat"></label>
+                                 <input id="lat" name="lat" type="text" style="width:75px" value="12.9521265" /><label class="units">°</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td><label>Longitude:</label>&nbsp;</td>
+                              <td width="68%"><label for="long"></label>
+                                 <input id="long" name="long" type="text" style="width:75px" value="77.6439412" /><label class="units">°</label>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td height="70" colspan="3" align="left" valign="middle"><input type="submit" name="sendevent" id="sendevent" value="Send Events" class="yellowButton" onclick="callGPSFunc()" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- <div id="bottomdiv">
+                <div id="bottomContainerdiv" class="detailsContainer" style="display:none;">
+                  Dashboard
+                  <div class="detailsBorder">
+                     <img src="images/details-border.png" />
+                  </div>
+                  <div id="detailsContent" >
+                      <div class="detailsHeading">Some</div>
+                      <div> </div>
+
+                  </div>
+
+               </div>
+            </div> -->
+      </div>
+      <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript">  </script> -->
+      <script src="js/realtime.js" type="text/javascript"></script>
+      <script src="js/mqttws31.js" type="text/javascript"></script>
+      <script type="text/javascript">
+          var cm = null;
+
+          var realtime = new Realtime();
+
+          function getPos(el, sProp) {
+              var iPos = 0
+              while (el != null) {
+                  iPos += el["offset" + sProp]
+                  el = el.offsetParent
+              }
+              return iPos
+
+          }
+
+          function show(el, m) {
+            if (m) {
+                m.style.display = '';
+                m.style.pixelLeft = getPos(el, "Left")
+                m.style.pixelTop = getPos(el, "Top") + el.offsetHeight
+            }
+            if ((m != cm) && (cm)) cm.style.display = 'none'
+            cm = m
+          }
+
+          function callFuelFunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.fuel = document.getElementById("fuel").value;
+              jsonObj.d.lat = document.getElementById("lat").value;
+              jsonObj.d.long = document.getElementById("long").value;
+              realtime.publish(jsonObj, "fuel");
+          }
+
+          function callETFunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.engineTemp = document.getElementById("et").value;
+              realtime.publish(jsonObj, "engineTemp");
+          }
+
+          function callBatteryFunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.battery = document.getElementById("battery").value;
+              realtime.publish(jsonObj, "battery");
+          }
+
+          function callSpeedFunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.speed = document.getElementById("speed").value;
+              realtime.publish(jsonObj, "speed");
+          }
+
+          function callABFunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.airBagStatus = document.getElementById("airbag").value;
+              jsonObj.d.lat = document.getElementById("lat").value;
+              jsonObj.d.long = document.getElementById("long").value;
+              realtime.publish(jsonObj, "airbag");
+          }
+
+          function callEmissionFunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.hc = document.getElementById("hc").value;
+              jsonObj.d.co = document.getElementById("co").value;
+              jsonObj.d.no = document.getElementById("no").value;
+              jsonObj.d.co2 = document.getElementById("co2").value;
+
+              realtime.publish(jsonObj, "emission");
+          }
+
+          function callTPfunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.tyreFL = document.getElementById("tyreFL").value;
+              jsonObj.d.tyreFR = document.getElementById("tyreFR").value;
+              jsonObj.d.tyreBL = document.getElementById("tyreBL").value;
+              jsonObj.d.tyreBR = document.getElementById("tyreBR").value;
+
+              realtime.publish(jsonObj, "tyrepressure");
+          }
+
+          function callGPSFunc() {
+              var jsonObj = buildJson();
+              jsonObj.d.lat = document.getElementById("lat").value;
+              jsonObj.d.long = document.getElementById("long").value;
+
+              realtime.publish(jsonObj, "gps");
+          }
+
+          function buildJson() {
+              //the json event object
+              var jsonObj = {};
+              jsonObj.d = {};
+              //jsonObj.d.userName = document.getElementById("textbox").value;
+              return jsonObj;
+          }
+
+          function myFunction() {
+              if(document.getElementById("textbox").value) {
+                document.getElementById("validID").style.display = "none";
+                document.getElementById("leftcolumnBgdiv").style.display = "";
+                document.getElementById("d1").style.display = "";
+                document.getElementById("d2").style.display = "";
+                document.getElementById("d3").style.display = "";
+                document.getElementById("d4").style.display = "";
+                document.getElementById("d5").style.display = "";
+                document.getElementById("d6").style.display = "";
+                document.getElementById("d7").style.display = "";
+                document.getElementById("d8").style.display = "";
+                document.getElementById("detailsContainerdiv").style.display = "";
+                // document.getElementById("bottomContainerdiv").style.display = "";
+                document.getElementById("LoginName").innerHTML = "Welcome : " + document.getElementById("textbox").value;
+              }
+          }
+
+      </script>
+   </body>
+</html>
